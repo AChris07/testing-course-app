@@ -1,0 +1,13 @@
+.calculator-screen {
+  background: #687d7185;
+  min-height: 30px;
+  margin: 5px 0;
+  padding: 5px;
+  -webkit-box-shadow: inset 2px 2px 5px 0px #687d71;
+  -moz-box-shadow: inset 2px 2px 5px 0px #687d71;
+  box-shadow: inset 2px 2px 5px 0px #687d71;
+}
+
+.calculator-screen__value {
+  font-weight: bold;
+}
