@@ -4,12 +4,17 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
-    "express": "^4.16.4"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mathjs": "^5.6.0"
   },
   "scripts": {
-     "start": "node server.js"
+    "start": "node server.js",
+    "test": "./node_modules/jest/bin/jest.js"
   },
+  "jest": {},
   "devDependencies": {
+    "jest": "^24.1.0",
     "moxios": "^0.4.0",
     "supertest": "^3.4.2"
   }
