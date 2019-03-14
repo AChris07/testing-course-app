@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const routes = require('./routes');
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3001;
 
 app.use(bodyParser.json());
 
@@ -15,7 +15,13 @@ app.use((err, req, res, next) => {
   } else {
     next();
   }
-})
+});
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.use('/', routes, (req, res) =>
   res.sendStatus(404)

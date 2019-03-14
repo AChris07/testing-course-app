@@ -2,9 +2,11 @@ import React from 'react';
 
 import './Button.css';
 
-const Button = ({ children }) => {
+const Button = ({ children, onClick }) => {
   return (
-    <button className="calculator-button">
+    <button
+      className="calculator-button"
+      onClick={onClick}>
       {children}
     </button>
   );
