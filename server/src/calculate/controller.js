@@ -12,8 +12,8 @@ router.get('/:encodedExpr', (req, res) => {
   if (!Boolean(expression)) {
     console.log('No valid expression sent, skipping...');
     res.status(400)
-      .send('A valid expression needs to be sent as part of the body');
-    return;
+      .send('A valid expression needs to be sent as part of the body')
+      .end();
   }
 
   try {

@@ -19,6 +19,10 @@ jest.mock('./service', () => ({
   evalExpression: jest.fn(() => 19)
 }));
 
+// Hide console calls inside tests
+console.log = jest.fn();
+console.error = jest.fn();
+
 describe('GET /:encodedExpr', () => {
   it('should call the calculation service', async () => {
     await request(app)
@@ -41,9 +45,18 @@ describe('GET /:encodedExpr', () => {
     expect(res.body.response).toBe(19);
   });
 
-  it('should not accept a non-valid base64 encoded string', async () => {
+  it('should not accept a non-valid base64 encoded string and return a 400', async () => {
     await request(app)
       .get(`/${stubFalseEncoding}`)
       .expect(400);
   });
+
+  it('should return a 400 if there\'s an error during expression evaluation', async () => {
+    mockedService.evalExpression.mockImplementationOnce(() =>
+      {throw new Error('Stub Error')});
+
+    await request(app)
+      .get(`/${stubEncodedExpr}`)
+      .expect(400);
+  })
 });

@@ -65,6 +65,10 @@ jest.mock('../db', () => ({
   }
 }));
 
+// Hide console calls inside tests
+console.log = jest.fn();
+console.error = jest.fn();
+
 describe('GET /', () => {
   it('should call the database collection to find results', async () => {
     await request(app).get('/');
