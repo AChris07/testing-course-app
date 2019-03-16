@@ -5,7 +5,7 @@ import './Screen.css';
 
 const Screen = ({ value }) => {
   return (
-    <section className="calculator-screen">
+    <section data-e2e-id="screen" className="calculator-screen">
       <span className="calculator-screen__value">{value}</span>
     </section>
   );

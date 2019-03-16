@@ -16,7 +16,7 @@ class App extends Component {
               </Navbar.Brand>
             </Navbar.Header>
             <Nav bsStyle="pills" activeKey={1}>
-              <NavItem eventKey={1} href="#">
+              <NavItem data-e2e-id="app-title" eventKey={1} href="#">
                 Calculadora Científica
               </NavItem>
             </Nav>

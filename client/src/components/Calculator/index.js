@@ -39,6 +39,7 @@ class Calculator extends Component {
 
     const [zeroDigit, ...digits] = range(10).map((digit, idx) =>
       <Button
+        testId={`digit-button-${digit}`}
         key={idx}
         onClick={this.onClickButton.bind(this, digit)}
         type="digit">
@@ -48,6 +49,7 @@ class Calculator extends Component {
 
     const arithmeticSigns = Object.values(ARITHMETIC_OP).map((sign, idx) =>
       <Button
+        testId={`sign-button-${sign}`}
         key={idx}
         onClick={this.onClickButton.bind(this, sign)}
         type="arithmetic">
@@ -63,10 +65,12 @@ class Calculator extends Component {
           {zeroDigit}
           {arithmeticSigns}
           <Button
+            testId="decimal-button"
             key="decimal"
             onClick={this.onClickButton.bind(this, '.')}
             type="decimal">.</Button>
           <Button
+            testId="equal-button"
             key="equal"
             onClick={this.onClickEqualButton}
             type="equal">=</Button>

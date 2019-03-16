@@ -1,0 +1,16 @@
+{
+  "name": "e2e-tests",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "jest": "^24.5.0",
+    "lodash": "^4.17.11",
+    "puppeteer": "^1.13.0"
+  },
+  "scripts": {
+    "start": "./node_modules/jest/bin/jest.js"
+  },
+  "jest": {
+    "verbose": true
+  }
+}
