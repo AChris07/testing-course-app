@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "./node_modules/jest/bin/jest.js",
+    "test": "./node_modules/jest/bin/jest.js"
   },
   "jest": {
     "verbose": true

@@ -16,7 +16,8 @@ const stubFalseEncoding = '==falseEncoding';
 
 // Mocks
 jest.mock('./service', () => ({
-  evalExpression: jest.fn(() => 19)
+  evalExpression: jest.fn(() => 19),
+  storeResult: jest.fn(() => Promise.resolve())
 }));
 
 // Hide console calls inside tests
@@ -24,12 +25,20 @@ console.log = jest.fn();
 console.error = jest.fn();
 
 describe('GET /:encodedExpr', () => {
-  it('should call the calculation service', async () => {
+  it('should call the calculation service to evaluate the expression', async () => {
     await request(app)
       .get(`/${stubEncodedExpr}`);
 
     expect(mockedService.evalExpression).toHaveBeenCalled();
     mockedService.evalExpression.mockClear();
+  });
+
+  it('should call the calculation service to store the result once found', async () => {
+    await request(app)
+      .get(`/${stubEncodedExpr}`);
+
+    expect(mockedService.storeResult).toHaveBeenCalled();
+    mockedService.storeResult.mockClear();
   });
 
   it('should accept a valid encoded expression and return a 200', async () => {
