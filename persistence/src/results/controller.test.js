@@ -50,7 +50,8 @@ jest.mock('../db', () => ({
           ? allResults.filter(result => result.resultId === query.resultId)
           : allResults;
       }),
-      insert: jest.fn(() => {})
+      insert: jest.fn(() => {}),
+      remove: jest.fn(() => {})
     },
     getModel: jest.fn(() => ({
       resultId: '03b45260-46cd-11e9-9ac0-b141f7c91a95',
@@ -141,6 +142,7 @@ describe('POST /', () => {
       .send(stubIncorrectRequest)
       .expect(400);
   });
+
   it('should return a 400 if no result is set', async () => {
     const stubIncorrectRequest = {
       expression: stubCreateResultRequest.expression
@@ -151,6 +153,7 @@ describe('POST /', () => {
       .send(stubIncorrectRequest)
       .expect(400);
   });
+
   it('should call the database collection to insert the new result', async () => {
     await request(app)
       .post('/')
@@ -159,6 +162,7 @@ describe('POST /', () => {
     expect(mockedResults.collection.insert).toHaveBeenCalled();
     mockedResults.collection.insert.mockClear();
   });
+
   it('should return a 400 if an error occurs during data insertion', async () => {
     mockedResults.collection.insert.mockImplementationOnce(() => {
       throw new Error('Stub Error');
@@ -169,10 +173,37 @@ describe('POST /', () => {
       .send(stubCreateResultRequest)
       .expect(400);
   });
+
   it('should return 201 if the item is inserted correctly', async () => {
     await request(app)
       .post(`/`)
       .send(stubCreateResultRequest)
       .expect(201);
+  });
+});
+
+describe('DELETE /:resultId', async () => {
+  it('should call the database collection to find results', async () => {
+    await request(app).delete(`/${stubExistingResultId}`);
+
+    expect(mockedResults.collection.find).toHaveBeenCalled();
+    mockedResults.collection.find.mockClear();
+  });
+
+  it('should call the database collection to delete the results, if any', async () => {
+    await request(app).delete(`/${stubExistingResultId}`);
+
+    expect(mockedResults.collection.remove).toHaveBeenCalled();
+    mockedResults.collection.remove.mockClear();
+  });
+
+  it('should return a 204', async () => {
+    await request(app).delete(`/${stubExistingResultId}`)
+      .expect(204);
+  });
+
+  it('should return a 404 if no result to delete is found', async () => {
+    await request(app).delete(`/${stubNotFoundResultId}`)
+      .expect(404);
   });
 });

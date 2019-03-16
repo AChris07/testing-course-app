@@ -1,0 +1,8 @@
+{
+    "automock": false,
+    "testRegex": ".itest.js$",
+    "rootDir": "../",
+    "globalSetup": "./utils/global-setup.js",
+    "globalTeardown": "./utils/global-teardown.js",
+    "testEnvironment": "node"
+}

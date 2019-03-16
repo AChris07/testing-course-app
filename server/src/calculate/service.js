@@ -4,7 +4,7 @@ const axios = require('axios');
 const { BASE_URLS } = require('../constants');
 
 const evalExpression = expr => math.eval(expr);
-const storeResult = async (result, expression) => {
+const storeResult = async (expression, result) => {
   try {
     return await axios.post(`${BASE_URLS.PERSISTENCE}/results`, {
       expression,

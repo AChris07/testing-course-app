@@ -14,9 +14,7 @@ router.get('/', (req, res) => {
 
 router.get('/:resultId', (req, res) => {
   const { resultId } = req.params;
-  const allResults = results.collection.find({
-    resultId
-  });
+  const allResults = results.collection.find({ resultId });
   allResults.length > 0
     ? res.json(allResults[0])
     : res.sendStatus(404);
@@ -46,6 +44,17 @@ router.post('/', (req, res) => {
   }
 
   res.sendStatus(201);
+});
+
+router.delete('/:resultId', (req, res) => {
+  const { resultId } = req.params;
+  const allResults = results.collection.find({ resultId });
+  if (allResults.length > 0) {
+    results.collection.remove(allResults);
+    res.sendStatus(204);
+  } else {
+    res.sendStatus(404);
+  }
 });
 
 module.exports = router;

@@ -6,10 +6,10 @@ const resultsCollectionFactory = db =>
 
 const getResultModel = (
   resultId, expression,
-  result, dateCreated
+  result
 ) => ({
   resultId, expression,
-  result, dateCreated
+  result
 });
 
 module.exports = {
