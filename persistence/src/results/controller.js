@@ -5,10 +5,6 @@ const { results } = require('../db');
 
 const router = express.Router();
 
-// router.get('/uuid', (req, res) => res.json(uuidv1()));
-
-// router.get('/date', (req, res) => res.json(Date.now()));
-
 router.get('/', (req, res) => {
   const allResults = results.collection.find();
   allResults.length > 0
